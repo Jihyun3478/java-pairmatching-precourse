@@ -29,4 +29,21 @@ class CrewsTest {
         assertThat(crews.matchPair(new PairHistory(), Level.LEVEL1).size()).isEqualTo(3);
     }
 
+    @Test
+    void _3회까지_매칭이_안되면_예외를_반환한다() {
+        List<Crew> crews1 = new ArrayList<>();
+        crews1.add(new Crew(Course.BACKEND, "pobi"));
+        crews1.add(new Crew(Course.BACKEND, "lisa"));
+        PairHistory pairHistory = new PairHistory();
+        pairHistory.save(Level.LEVEL1, new Pair(crews1));
+
+
+        List<String> crews2 = new ArrayList<>();
+        crews2.add("pobi");
+        crews2.add("lisa");
+
+        Crews crews = new Crews(crews2, Course.BACKEND);
+        assertThatThrownBy(() -> crews.matchPair(pairHistory, Level.LEVEL1))
+            .isInstanceOf(IllegalStateException.class);
+    }
 }

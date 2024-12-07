@@ -16,10 +16,15 @@ public class Crews {
     }
 
     public Pair matchPair(PairHistory pairHistory, Level level) {
+        int count = 0;
         Pair pair = null;
         List<Crew> result;
         if (crews.size() == 3) {
             do {
+                count++;
+                if (count > 3) {
+                    throw new IllegalStateException();
+                }
                 Randoms.shuffle(crews);
                 result = new ArrayList<>();
                 result.add(crews.get(0));
@@ -34,6 +39,10 @@ public class Crews {
             return pair;
         }
         do {
+            count++;
+            if (count > 3) {
+                throw new IllegalStateException();
+            }
             Randoms.shuffle(crews);
             result = new ArrayList<>();
             result.add(crews.get(0));
