@@ -7,11 +7,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Crews {
 
-    private final List<Crew> crews = new ArrayList<>();
-
-    public Crews() {
-
-    }
+    private List<Crew> crews = new ArrayList<>();
 
     public void addAll(List<String> names, Course course) {
         for(String name : names) {
@@ -29,7 +25,7 @@ public class Crews {
                 if (count > 3) {
                     throw new IllegalStateException();
                 }
-                Randoms.shuffle(crews);
+                crews = Randoms.shuffle(crews);
                 result = new ArrayList<>();
                 result.add(crews.get(0));
                 result.add(crews.get(1));
@@ -47,7 +43,7 @@ public class Crews {
             if (count > 3) {
                 throw new IllegalStateException();
             }
-            Randoms.shuffle(crews);
+            crews = Randoms.shuffle(crews);
             result = new ArrayList<>();
             result.add(crews.get(0));
             result.add(crews.get(1));
@@ -57,5 +53,13 @@ public class Crews {
         crews.remove(0);
         crews.remove(0);
         return pair;
+    }
+
+    public void clear() {
+        crews.clear();
+    }
+
+    public boolean isEmpty() {
+        return crews.isEmpty();
     }
 }

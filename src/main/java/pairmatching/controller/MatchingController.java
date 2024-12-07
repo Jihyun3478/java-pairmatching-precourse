@@ -12,12 +12,14 @@ public class MatchingController {
     private final MatchingService matchingService = new MatchingService();
 
     public void run() {
-        OutputView.start();
-        MenuRequest menu = InputView.menu();
-
-        OutputView.step();
-        OutputView.inputStep();
+        MenuRequest menu;
         do {
+            OutputView.start();
+            menu = InputView.menu();
+            matchingService.setUp();
+            OutputView.step();
+            OutputView.inputStep();
+
             switch (menu.getMenu()) {
                 case "1":
                     StepRequest step = InputView.step();
@@ -34,6 +36,6 @@ public class MatchingController {
                     OutputView.clear();
                     break;
             }
-        } while (menu.getMenu().equals("Q"));
+        } while (!menu.getMenu().equals("Q"));
     }
 }
