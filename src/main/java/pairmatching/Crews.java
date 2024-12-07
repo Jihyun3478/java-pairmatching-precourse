@@ -15,18 +15,34 @@ public class Crews {
         }
     }
 
-    public Pair matchPair() {
-        Randoms.shuffle(crews);
+    public Pair matchPair(PairHistory pairHistory, Level level) {
+        Pair pair = null;
+        List<Crew> result;
         if (crews.size() == 3) {
-            List<Crew> result = new ArrayList<>();
-            result.add(crews.remove(0));
-            result.add(crews.remove(0));
-            result.add(crews.remove(0));
-            return new Pair(result);
+            do {
+                Randoms.shuffle(crews);
+                result = new ArrayList<>();
+                result.add(crews.get(0));
+                result.add(crews.get(1));
+                result.add(crews.get(2));
+                pair = new Pair(result);
+            } while (pairHistory.existPair(level, pair));
+            pairHistory.save(level, pair);
+            crews.remove(0);
+            crews.remove(0);
+            crews.remove(0);
+            return pair;
         }
-        List<Crew> result = new ArrayList<>();
-        result.add(crews.remove(0));
-        result.add(crews.remove(0));
-        return new Pair(result);
+        do {
+            Randoms.shuffle(crews);
+            result = new ArrayList<>();
+            result.add(crews.get(0));
+            result.add(crews.get(1));
+            pair = new Pair(result);
+        } while (pairHistory.existPair(level, pair));
+        pairHistory.save(level, pair);
+        crews.remove(0);
+        crews.remove(0);
+        return pair;
     }
 }

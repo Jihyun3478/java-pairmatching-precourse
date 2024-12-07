@@ -13,7 +13,7 @@ class CrewsTest {
         List<String> crewNames = CrewNameParser.getNames(Course.BACKEND);
         Crews crews = new Crews(crewNames, Course.BACKEND);
 
-        Pair pair = crews.matchPair();
+        Pair pair = crews.matchPair(new PairHistory(), Level.LEVEL1);
     }
 
     @Test
@@ -25,7 +25,8 @@ class CrewsTest {
         crewNames.add("keke");
         crewNames.add("aaa");
         Crews crews = new Crews(crewNames, Course.BACKEND);
-        assertThat(crews.matchPair().size()).isEqualTo(2);
-        assertThat(crews.matchPair().size()).isEqualTo(3);
+        assertThat(crews.matchPair(new PairHistory(), Level.LEVEL1).size()).isEqualTo(2);
+        assertThat(crews.matchPair(new PairHistory(), Level.LEVEL1).size()).isEqualTo(3);
     }
+
 }
