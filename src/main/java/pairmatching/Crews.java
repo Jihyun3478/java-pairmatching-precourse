@@ -7,13 +7,16 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Crews {
 
-    private final List<String> crews = new ArrayList<>();
+    private final List<Crew> crews = new ArrayList<>();
 
-    public Crews(List<String> names) {
-        crews.addAll(names);
+    public Crews(List<String> names, Course course) {
+        for(String name : names) {
+            crews.add(new Crew(course, name));
+        }
     }
 
-    public List<String> shuffle() {
-        return Randoms.shuffle(crews);
+    public Pair matchPair() {
+        Randoms.shuffle(crews);
+        return new Pair(crews.subList(0, 1));
     }
 }
