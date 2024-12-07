@@ -5,8 +5,6 @@ import java.util.List;
 import pairmatching.Course;
 import pairmatching.CrewNameParser;
 import pairmatching.Crews;
-import pairmatching.Level;
-import pairmatching.Mission;
 import pairmatching.Pair;
 import pairmatching.PairHistory;
 import pairmatching.dto.PairResponse;

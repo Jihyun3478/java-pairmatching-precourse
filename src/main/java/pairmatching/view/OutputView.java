@@ -4,7 +4,7 @@ import pairmatching.dto.PairResponse;
 
 public class OutputView {
     public static void start() {
-        System.out.printf("기능을 선택하세요.\n"
+        System.out.println("기능을 선택하세요.\n"
             + "1. 페어 매칭\n"
             + "2. 페어 조회\n"
             + "3. 페어 초기화\n"
@@ -33,5 +33,8 @@ public class OutputView {
 
     public static void result(PairResponse response) {
         System.out.println("페어 매칭 결과입니다.");
+        response.getPairs().forEach(innerPair -> {
+            System.out.println(String.join(" : ", innerPair.getNames()));
+        });
     }
 }
