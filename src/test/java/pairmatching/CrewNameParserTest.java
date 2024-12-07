@@ -6,11 +6,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-class CrewTest {
-    /*@Test
-    void 미션을_함께_수행할_페어를_두명씩_매칭한다() {
-
-    }*/
+class CrewNameParserTest {
 
     @Test
     void 크루_이름을_불러온다() {
