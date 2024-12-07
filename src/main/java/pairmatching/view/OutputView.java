@@ -26,6 +26,10 @@ public class OutputView {
         System.out.println("과정, 레벨, 미션을 선택하세요.");
     }
 
+    public static void clear() {
+        System.out.println("초기화 되었습니다.");
+    }
+
     public static void result() {
         System.out.println("페어 매칭 결과입니다.");
     }
