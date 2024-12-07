@@ -23,6 +23,13 @@ public enum Mission {
         this.level = level;
     }
 
+    public static Mission from(String name) {
+        return Arrays.stream(values())
+            .filter(mission -> mission.name().equals(name))
+            .findAny()
+            .orElse(null);
+    }
+
     public Level getLevel() {
         return level;
     }

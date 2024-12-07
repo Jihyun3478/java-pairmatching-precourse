@@ -1,5 +1,7 @@
 package pairmatching.view;
 
+import pairmatching.dto.PairResponse;
+
 public class OutputView {
     public static void start() {
         System.out.printf("기능을 선택하세요.\n"
@@ -18,8 +20,7 @@ public class OutputView {
             + "  - 레벨3: \n"
             + "  - 레벨4: 성능개선 | 배포\n"
             + "  - 레벨5: \n"
-            + "############################################\n"
-            + "과정, 레벨, 미션을 선택하세요.");
+            + "############################################\n");
     }
 
     public static void inputStep() {
@@ -30,7 +31,7 @@ public class OutputView {
         System.out.println("초기화 되었습니다.");
     }
 
-    public static void result() {
+    public static void result(PairResponse response) {
         System.out.println("페어 매칭 결과입니다.");
     }
 }

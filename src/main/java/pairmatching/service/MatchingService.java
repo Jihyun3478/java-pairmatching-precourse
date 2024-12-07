@@ -9,6 +9,8 @@ import pairmatching.Level;
 import pairmatching.Mission;
 import pairmatching.Pair;
 import pairmatching.PairHistory;
+import pairmatching.dto.PairResponse;
+import pairmatching.dto.StepRequest;
 
 public class MatchingService {
     private PairHistory pairHistory = new PairHistory();
@@ -19,12 +21,13 @@ public class MatchingService {
         crews.addAll(CrewNameParser.getNames(Course.BACKEND), Course.BACKEND);
     }
 
-    public void matchPairs(Course course, Level level, Mission mission) {
-        crews.matchPair(pairHistory, mission);
+    public void matchPairs(StepRequest request) {
+        crews.matchPair(pairHistory, request.getMission());
     }
 
-    public List<Pair> findPairs(Course course, Level level, Mission mission) {
-        return pairHistory.get(course, level, mission);
+    public PairResponse findPairs(StepRequest request) {
+        List<Pair> pairs = pairHistory.get(request.getCourse(), request.getLevel(), request.getMission());
+        return PairResponse.from(pairs);
     }
 
     public void clear() {

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Pair {
     private final Set<Crew> pair = new HashSet<>();
@@ -28,5 +29,11 @@ public class Pair {
     @Override
     public int hashCode() {
         return Objects.hashCode(pair);
+    }
+
+    public List<String> getNames() {
+        return pair.stream()
+            .map(Crew::getName)
+            .collect(Collectors.toList());
     }
 }

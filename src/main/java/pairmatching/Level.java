@@ -1,5 +1,6 @@
 package pairmatching;
 
+import java.util.Arrays;
 import java.util.List;
 
 public enum Level {
@@ -13,6 +14,13 @@ public enum Level {
 
     Level(String name) {
         this.name = name;
+    }
+
+    public static Level from(String name) {
+        return Arrays.stream(values())
+            .filter(level -> level.name.equals(name))
+            .findAny()
+            .orElse(null);
     }
 
     public List<Mission> getMissions() {
