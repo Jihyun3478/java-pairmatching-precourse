@@ -9,4 +9,8 @@ public class Pair {
     public Pair(List<Crew> crews) {
         pair.addAll(crews);
     }
+
+    public int size() {
+        return pair.size();
+    }
 }

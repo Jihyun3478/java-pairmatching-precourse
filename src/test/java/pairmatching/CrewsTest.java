@@ -1,5 +1,7 @@
 package pairmatching;
 
+import static org.assertj.core.api.AssertionsForClassTypes.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,5 +14,18 @@ class CrewsTest {
         Crews crews = new Crews(crewNames, Course.BACKEND);
 
         Pair pair = crews.matchPair();
+    }
+
+    @Test
+    void 홀수면_마지막_페어에_포함한다() {
+        List<String> crewNames = new ArrayList<>();
+        crewNames.add("joy");
+        crewNames.add("sad");
+        crewNames.add("mad");
+        crewNames.add("keke");
+        crewNames.add("aaa");
+        Crews crews = new Crews(crewNames, Course.BACKEND);
+        assertThat(crews.matchPair().size()).isEqualTo(2);
+        assertThat(crews.matchPair().size()).isEqualTo(3);
     }
 }

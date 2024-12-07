@@ -17,6 +17,16 @@ public class Crews {
 
     public Pair matchPair() {
         Randoms.shuffle(crews);
-        return new Pair(crews.subList(0, 1));
+        if (crews.size() == 3) {
+            List<Crew> result = new ArrayList<>();
+            result.add(crews.remove(0));
+            result.add(crews.remove(0));
+            result.add(crews.remove(0));
+            return new Pair(result);
+        }
+        List<Crew> result = new ArrayList<>();
+        result.add(crews.remove(0));
+        result.add(crews.remove(0));
+        return new Pair(result);
     }
 }
