@@ -11,9 +11,10 @@ class CrewsTest {
     @Test
     void 미션을_함께_수행할_페어를_두명씩_매칭한다() {
         List<String> crewNames = CrewNameParser.getNames(Course.BACKEND);
-        Crews crews = new Crews(crewNames, Course.BACKEND);
+        Crews crews = new Crews();
+        crews.addAll(crewNames, Course.BACKEND);
 
-        Pair pair = crews.matchPair(new PairHistory(), Level.LEVEL1);
+        Pair pair = crews.matchPair(new PairHistory(), Mission.자동차경주);
     }
 
     @Test
@@ -24,9 +25,10 @@ class CrewsTest {
         crewNames.add("mad");
         crewNames.add("keke");
         crewNames.add("aaa");
-        Crews crews = new Crews(crewNames, Course.BACKEND);
-        assertThat(crews.matchPair(new PairHistory(), Level.LEVEL1).size()).isEqualTo(2);
-        assertThat(crews.matchPair(new PairHistory(), Level.LEVEL1).size()).isEqualTo(3);
+        Crews crews = new Crews();
+        crews.addAll(crewNames, Course.BACKEND);
+        assertThat(crews.matchPair(new PairHistory(), Mission.자동차경주).size()).isEqualTo(2);
+        assertThat(crews.matchPair(new PairHistory(), Mission.자동차경주).size()).isEqualTo(3);
     }
 
     @Test
@@ -35,15 +37,16 @@ class CrewsTest {
         crews1.add(new Crew(Course.BACKEND, "pobi"));
         crews1.add(new Crew(Course.BACKEND, "lisa"));
         PairHistory pairHistory = new PairHistory();
-        pairHistory.save(Level.LEVEL1, new Pair(crews1));
+        pairHistory.save(Mission.자동차경주, new Pair(crews1));
 
 
         List<String> crews2 = new ArrayList<>();
         crews2.add("pobi");
         crews2.add("lisa");
 
-        Crews crews = new Crews(crews2, Course.BACKEND);
-        assertThatThrownBy(() -> crews.matchPair(pairHistory, Level.LEVEL1))
+        Crews crews = new Crews();
+        crews.addAll(crews2, Course.BACKEND);
+        assertThatThrownBy(() -> crews.matchPair(pairHistory, Mission.자동차경주))
             .isInstanceOf(IllegalStateException.class);
     }
 }

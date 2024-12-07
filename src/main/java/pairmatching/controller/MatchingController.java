@@ -1,5 +1,6 @@
 package pairmatching.controller;
 
+import pairmatching.service.MatchingService;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
 
@@ -16,7 +17,8 @@ public class MatchingController {
         do {
             switch (menu) {
                 case "1":
-                    String result = matchingService.matchPairs(InputView.step());
+                    matchingService.matchPairs(InputView.step());
+                    String result = matchingService.findPairs(InputView.step());
                     OutputView.result(result);
                     break;
                 case "2":

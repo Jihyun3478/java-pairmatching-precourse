@@ -14,13 +14,13 @@ public class PairHistoryTest {
         crews.add(new Crew(Course.BACKEND, "포비"));
         crews.add(new Crew(Course.BACKEND, "제임스"));
         PairHistory pairHistory = new PairHistory();
-        pairHistory.save(Level.LEVEL1, new Pair(crews));
+        pairHistory.save(Mission.자동차경주, new Pair(crews));
 
         List<Crew> existCrews = new ArrayList<>();
         existCrews.add(new Crew(Course.BACKEND, "제임스"));
         existCrews.add(new Crew(Course.BACKEND, "포비"));
 
-        assertThat(pairHistory.existPair(Level.LEVEL1, new Pair(existCrews))).isTrue();
-        assertThat(pairHistory.existPair(Level.LEVEL2, new Pair(existCrews))).isFalse();
+        assertThat(pairHistory.existPair(Mission.자동차경주, new Pair(existCrews))).isTrue();
+        assertThat(pairHistory.existPair(Mission.장바구니, new Pair(existCrews))).isFalse();
     }
 }

@@ -6,16 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 public class PairHistory {
-    private final Map<Level, List<Pair>> pairHistory = new EnumMap<>(Level.class);
+    private final Map<Mission, List<Pair>> pairHistory = new EnumMap<>(Mission.class);
 
-    public void save(Level level, Pair pair) {
-        List<Pair> pairs = pairHistory.getOrDefault(level, new ArrayList<>());
+    public void save(Mission mission, Pair pair) {
+        List<Pair> pairs = pairHistory.getOrDefault(mission, new ArrayList<>());
         pairs.add(pair);
-        pairHistory.put(level, pairs);
+        pairHistory.put(mission, pairs);
     }
 
-    public boolean existPair(Level level, Pair pair) {
-        List<Pair> pairs = pairHistory.getOrDefault(level, new ArrayList<>());
-        return pairs.contains(pair);
+    public boolean existPair(Mission mission, Pair pair) {
+        return mission.getLevel().getMissions().stream()
+            .anyMatch(mission1 -> pairHistory.getOrDefault(mission1, new ArrayList<>()).contains(pair));
+    }
+
+    public List<Pair> get(Course course, Level level, Mission mission) {
+        return pairHistory.get(mission);
+    }
+
+    public void clear() {
+        pairHistory.clear();
     }
 }
