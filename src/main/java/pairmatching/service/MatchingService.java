@@ -1,7 +1,9 @@
 package pairmatching.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import pairmatching.Course;
 import pairmatching.CrewNameParser;
 import pairmatching.Crews;
@@ -21,8 +23,9 @@ public class MatchingService {
     }
 
     public void matchPairs(StepRequest request) {
+        crews.shuffle(request.getCourse());
         while (!crews.isEmpty()) {
-            crews.matchPair(pairHistory, request.getMission());
+            crews.matchPair(pairHistory, request.getMission(), request.getCourse());
         }
     }
 

@@ -14,7 +14,7 @@ class CrewsTest {
         Crews crews = new Crews();
         crews.addAll(crewNames, Course.BACKEND);
 
-        Pair pair = crews.matchPair(new PairHistory(), Mission.자동차경주);
+        Pair pair = crews.matchPair(new PairHistory(), Mission.자동차경주, Course.BACKEND);
     }
 
     @Test
@@ -27,8 +27,8 @@ class CrewsTest {
         crewNames.add("aaa");
         Crews crews = new Crews();
         crews.addAll(crewNames, Course.BACKEND);
-        assertThat(crews.matchPair(new PairHistory(), Mission.자동차경주).size()).isEqualTo(2);
-        assertThat(crews.matchPair(new PairHistory(), Mission.자동차경주).size()).isEqualTo(3);
+        assertThat(crews.matchPair(new PairHistory(), Mission.자동차경주, Course.BACKEND).size()).isEqualTo(2);
+        assertThat(crews.matchPair(new PairHistory(), Mission.자동차경주, Course.BACKEND).size()).isEqualTo(3);
     }
 
     @Test
@@ -46,7 +46,7 @@ class CrewsTest {
 
         Crews crews = new Crews();
         crews.addAll(crews2, Course.BACKEND);
-        assertThatThrownBy(() -> crews.matchPair(pairHistory, Mission.자동차경주))
+        assertThatThrownBy(() -> crews.matchPair(pairHistory, Mission.자동차경주, Course.BACKEND))
             .isInstanceOf(IllegalStateException.class);
     }
 }

@@ -9,9 +9,11 @@ import java.util.stream.Collectors;
 
 public class Pair {
     private final Set<Crew> pair = new HashSet<>();
+    private List<Crew> sortedPair = new ArrayList<>();
 
     public Pair(List<Crew> crews) {
         pair.addAll(crews);
+        sortedPair = new ArrayList<>(crews);
     }
 
     public int size() {
@@ -32,8 +34,8 @@ public class Pair {
     }
 
     public List<String> getNames() {
-        return pair.stream()
-            .map(Crew::getName)
+        return sortedPair.stream()
+            .map(crew -> crew.getName())
             .collect(Collectors.toList());
     }
 }

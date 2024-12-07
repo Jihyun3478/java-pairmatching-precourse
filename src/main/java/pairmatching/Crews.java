@@ -2,6 +2,7 @@ package pairmatching;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -15,7 +16,7 @@ public class Crews {
         }
     }
 
-    public Pair matchPair(PairHistory pairHistory, Mission mission) {
+    public Pair matchPair(PairHistory pairHistory, Mission mission, Course course) {
         int count = 0;
         Pair pair = null;
         List<Crew> result;
@@ -25,12 +26,14 @@ public class Crews {
                 if (count > 3) {
                     throw new IllegalStateException();
                 }
-                crews = Randoms.shuffle(crews);
                 result = new ArrayList<>();
                 result.add(crews.get(0));
                 result.add(crews.get(1));
                 result.add(crews.get(2));
                 pair = new Pair(result);
+                if (pairHistory.existPair(mission, pair)) {
+                    shuffle(course);
+                }
             } while (pairHistory.existPair(mission, pair));
             pairHistory.save(mission, pair);
             crews.remove(0);
@@ -43,11 +46,13 @@ public class Crews {
             if (count > 3) {
                 throw new IllegalStateException();
             }
-            crews = Randoms.shuffle(crews);
             result = new ArrayList<>();
             result.add(crews.get(0));
             result.add(crews.get(1));
             pair = new Pair(result);
+            if (pairHistory.existPair(mission, pair)) {
+                shuffle(course);
+            }
         } while (pairHistory.existPair(mission, pair));
         pairHistory.save(mission, pair);
         crews.remove(0);
@@ -61,5 +66,18 @@ public class Crews {
 
     public boolean isEmpty() {
         return crews.isEmpty();
+    }
+
+    public void shuffle(Course course) {
+        List<String> shuffle = Randoms.shuffle(getNames());
+        crews = new ArrayList<>();
+        for(String name : shuffle) {
+            crews.add(new Crew(course, name));
+        }
+    }
+
+    public List<String> getNames() {
+        return crews.stream().map(Crew::getName)
+            .collect(Collectors.toList());
     }
 }
